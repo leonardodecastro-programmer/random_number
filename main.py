@@ -1,5 +1,5 @@
 import random
-from flask import Flask, jsonify
+from flask import Flask
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ def gerar_numero():
     numero3 = random.randint(100, 999)
 
     resultado = f"{numero1}-{numero2}-{numero3}"
-    return jsonify({"numero": resultado})
+    return resultado
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)  # Porta 10000 é a padrão no Render
