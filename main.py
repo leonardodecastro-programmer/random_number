@@ -1,9 +1,16 @@
 import random
+from flask import Flask
 
-numero1 = random.randint(100, 999)
-numero2 = random.randint(100, 999)
-numero3 = random.randint(100, 999)
+app = Flask(__name__)
 
-resultado = f"{numero1}-{numero2}-{numero3}"
+@app.route('/')
+def gerar_numero():
+    numero1 = random.randint(100, 999)
+    numero2 = random.randint(100, 999)
+    numero3 = random.randint(100, 999)
 
-print(resultado)
+    resultado = f"{numero1}-{numero2}-{numero3}"
+    return resultado
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000)  # Porta 10000 é a padrão no Render
