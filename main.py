@@ -1,18 +1,16 @@
-import requests
+import random
+from flask import Flask, jsonify
 
-MERCADO_PAGO_ACCESS_TOKEN = "APP_USR-2067450290894309-010221-d3f0a2c6b3c51d9a60d4e482f4efa44f-1567018333"
+app = Flask(__name__)
 
-def verify_payment(payment_id):
-    """Verifica o status do pagamento no Mercado Pago."""
-    url = f"https://api.mercadopago.com/v1/payments/{payment_id}"
-    headers = {"Authorization": f"Bearer {MERCADO_PAGO_ACCESS_TOKEN}"}
+@app.route('/')
+def gerar_numero():
+    numero1 = random.randint(100, 999)
+    numero2 = random.randint(100, 999)
+    numero3 = random.randint(100, 999)
 
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        payment_data = response.json()
-        status = payment_data.get("status")
-        chat_id = payment_data.get("metadata", {}).get("chat_id")
+    resultado = f"{numero1}-{numero2}-{numero3}"
+    return jsonify({"numero": resultado})
 
-        return status, chat_id
-
-    return None, None
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000)
